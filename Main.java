@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args){
 
         String start, players;
-        int numOfPlayers;
+        int numOfPlayers, dealerIndex;
 
         Scanner input = new Scanner(System.in);
 
@@ -35,22 +35,33 @@ public class Main {
                 initGame.buildDeck();
 
                 System.out.println("How many bots do you want to verse? (2 - 9)");
+                while (!input.hasNextInt()) {
+                    System.out.println("That's not a number!");
+                    System.out.println("Please enter a valid number...");
+                    System.out.println("How many bots do you want to verse? (2 - 4)");
+                    input.next();
+                }
                 players = input.next();
 
                 //check players input
-                while (Integer.parseInt(players) < 2 || Integer.parseInt(players) > 9) {
+
+                while (Integer.parseInt(players) < 2 || Integer.parseInt(players) > 4) {
                     System.out.println("Please enter a valid number...");
-                    System.out.println("How many bots do you want to verse? (2 - 9)");
+                    System.out.println("How many bots do you want to verse? (2 - 4)");
                     players = input.next();
                 }
-                numOfPlayers = Integer.parseInt(players);
+                numOfPlayers = Integer.parseInt(players) + 1;
 
-                System.out.println(numOfPlayers);
-                /*
+
+                //iteratively create each player, when i = 0 playable character is created
                 for (int i = 0; i < numOfPlayers; i++){
+//                    initPlayer();
                     initPlayer.createPlayer(i);
                 }
-                */
+                dealerIndex = initGame.selectDealer(numOfPlayers);
+                System.out.println("DealerIndex = " + dealerIndex);
+
+
 
             } else {
                 //go back to menu/ ask to continue/load game
