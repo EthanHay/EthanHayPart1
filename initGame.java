@@ -16,8 +16,10 @@ public class initGame {
         //loop material here, most of game logic
     }
 
-    public static void buildDeck() {
+    public static ArrayList<initCard> buildDeck() {
         ArrayList<initCard> deck = new initDeck().initDeck();
+
+        return deck;
     }
 
 //    public static void getNumOfPlayers() {

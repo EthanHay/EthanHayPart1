@@ -1,12 +1,14 @@
 /**
  * Created by Ethan on 13-Sep-16.
  */
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
 
         String start, players;
         int numOfPlayers, dealerIndex;
+        ArrayList<initCard> deck;
 
         Scanner input = new Scanner(System.in);
 
@@ -32,9 +34,10 @@ public class Main {
                 System.out.println("Start = " + start);
                 System.out.println("Building new deck...");
 
-                initGame.buildDeck();
+                deck = initGame.buildDeck();
+                System.out.println(deck.toArray()[0].toString());
 
-                System.out.println("How many bots do you want to verse? (2 - 9)");
+                System.out.println("How many bots do you want to verse? (2 - 4)");
                 while (!input.hasNextInt()) {
                     System.out.println("That's not a number!");
                     System.out.println("Please enter a valid number...");

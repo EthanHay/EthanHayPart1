@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class initDeck {
     private static final int NUM_CARDS_INIT = 53; //this is the highest amount, add fail-safe later.  54 predefined cards, 53 + zero index
-    private ArrayList<initCard> cards;
+    public ArrayList<initCard> cards;
 
     public ArrayList<initCard> initDeck() {
         String rawContent;

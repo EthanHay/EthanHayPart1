@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,4 +20,16 @@ public class initCard {
         this.cardGravity = 1;
     }
 
+    public String toString() {
+        return "CardID = " + cardId + ", Hardness = " + cardHardness;
+    }
+
+//Doesnt work how i thought it would
+//    public ArrayList<String> toArray() {
+//        ArrayList<String> ret = new ArrayList<>();
+//        ret.add(Integer.toString(cardId));
+//        ret.add(Integer.toString(cardHardness));
+//
+//        return ret;
+//    }
 }
