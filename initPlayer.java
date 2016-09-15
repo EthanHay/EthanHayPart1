@@ -6,7 +6,7 @@
  */
 public class initPlayer {
 
-    public static void createPlayer(String one) {
-        System.out.printf(one);
+    public static void createPlayer(int playerNumber) {
+        System.out.println(playerNumber);
     }
 }

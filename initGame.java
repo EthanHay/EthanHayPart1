@@ -8,5 +8,20 @@ public class initGame {
     public static class startGame{
 
     }
+
+    public static void buildDeck() {
+
+    }
+
+//    public static void getNumOfPlayers() {
+//
+//    }
+
+    public static class getDealer {
+
+    }
+
+
 }
+
 
