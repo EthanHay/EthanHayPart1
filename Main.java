@@ -34,8 +34,8 @@ public class Main {
                 System.out.println("Start = " + start);
                 System.out.println("Building new deck...");
 
-                deck = initGame.buildDeck();
-                System.out.println(deck.toArray()[0].toString());
+                initGame.buildDeck();
+                //System.out.println(deck.toArray()[0].toString());
 
                 System.out.println("How many bots do you want to verse? (2 - 4)");
                 while (!input.hasNextInt()) {
