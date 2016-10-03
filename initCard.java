@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -7,21 +8,15 @@ import java.util.Random;
  */
 public class initCard {
     //define all global variables
-    public int cardHardness, cardId;
-    public float cardGravity;
-    public ArrayList<Integer> cardCleavageValue;
-    public ArrayList<String> cardCleavageCondition;
-    public String cardCrustalAbundance;
-    public String cardEconomicValue;
+    public int cardId;
+    public ArrayList cardData;
 
-    public initCard(int cardIndex){
-        this.cardId = cardIndex;
-        this.cardHardness = new Random().nextInt(10);
-        this.cardGravity = 1;
+    public initCard(ArrayList cardData){
+        this.cardData = cardData;
     }
 
     public String toString() {
-        return "CardID = " + cardId + ", Hardness = " + cardHardness;
+        return "CardID = " + cardId;
     }
 
 //Doesnt work how i thought it would

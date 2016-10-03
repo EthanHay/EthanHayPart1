@@ -8,17 +8,28 @@ import java.util.Random;
 * Class that initialises all values for a new game
  */
 public class initGame {
+    ArrayList<initCard> deck;
+    private static int numOfPlayers;
 
-    public initGame() {
+    public initGame(int numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
+    }
+
+    public static void startGameLoop() {
 
     }
+
     public static class startGame{
         //loop material here, most of game logic
     }
 
+    @Override
+    public String toString() {
+        return "initGame{}";
+    }
+
     public static ArrayList<initCard> buildDeck() {
         ArrayList<initCard> deck = new initDeck().initDeck();
-
         return deck;
     }
 
@@ -30,9 +41,7 @@ public class initGame {
         return new Random().nextInt(numOfPlayers);
     }
 
-    public class XMLdata {
 
-    }
 }
 
 

@@ -18,11 +18,13 @@ import java.util.Random;
  * Created by Ethan on 15-Sep-16.
  */
 public class initDeck {
+
     private static final int NUM_CARDS_INIT = 53; //this is the highest amount, add fail-safe later.  54 predefined cards, 53 + zero index
     private static ArrayList<String> fileNames = new ArrayList<>();
     private static ArrayList<String> imageNames = new ArrayList<>();
     private static ArrayList<String> card_types = new ArrayList<>();
     private static ArrayList<String> titles = new ArrayList<>();
+    private static ArrayList<String> subtitles = new ArrayList<>();
     private static ArrayList<String> chemistrys = new ArrayList<>();
     private static ArrayList<String> classifications = new ArrayList<>();
     private static ArrayList<String> crystal_systems = new ArrayList<>();
@@ -33,11 +35,15 @@ public class initDeck {
     private static ArrayList<String> crustal_abundances = new ArrayList<>();
     private static ArrayList<String> economic_values = new ArrayList<>();
 
-    public ArrayList<initCard> cards;
+    public ArrayList cards = new ArrayList();
 
-    public ArrayList<initCard> initDeck() {
+    public initDeck() {
+
+    }
+
+    public ArrayList initDeck() {
         String rawContent;
-        cards = new ArrayList<>();
+
         {
             try {
 
@@ -64,7 +70,6 @@ public class initDeck {
 
                                 Element key2 = (Element) q;
                                 NodeList key2List = key2.getChildNodes();
-
 
                                 for (int k=0; k<key2List.getLength(); k++) {
 
@@ -126,6 +131,11 @@ public class initDeck {
                                                 r = key2List.item(k+2);
                                                 economic_values.add(r.getTextContent());
                                                 break;
+                                            case "subtitle":
+                                                r = key2List.item(k+2);
+                                                subtitles.add(r.getTextContent());
+                                                break;
+
                                         }
                                     }
                                 }
@@ -133,21 +143,36 @@ public class initDeck {
                         }
                     }
                 }
-//                System.out.println(fileNames);
-//                System.out.println(imageNames);
-//                System.out.println(card_types);
-//                System.out.println(titles);
-//                System.out.println(chemistrys);
-//                System.out.println(classifications);
-//                System.out.println(crystal_systems);
-//                System.out.println(occurrences);
-//                System.out.println(hardnesss);
-//                System.out.println(specific_gravitys);
-//                System.out.println(cleavages);
-//                System.out.println(crustal_abundances);
-//                System.out.println(economic_values);
-                for (int i = 0; i<fileNames.size(); i++){
-                    
+                int subtitleIndex = 0;
+                for (int i = 0; i<fileNames.size()-1; i++){
+
+                    ArrayList card = new ArrayList();
+
+                    card.add(fileNames.toArray()[i].toString());
+                    card.add(imageNames.toArray()[i].toString());
+                    card.add(card_types.toArray()[i].toString());
+                    if(card_types.toArray()[i].toString().equals("play")){
+                        card.add(titles.toArray()[i].toString());
+                        card.add(chemistrys.toArray()[i].toString());
+                        card.add(classifications.toArray()[i].toString());
+                        card.add(crystal_systems.toArray()[i].toString());
+                        card.add(occurrences.toArray()[i].toString());
+                        card.add(hardnesss.toArray()[i].toString());
+                        card.add(specific_gravitys.toArray()[i].toString());
+                        card.add(cleavages.toArray()[i].toString());
+                        card.add(crustal_abundances.toArray()[i].toString());
+                        card.add(economic_values.toArray()[i].toString());
+                    } else if ((card_types.toArray()[i].toString().equals("trump")|(card_types.toArray()[i].toString().equals("rule")))) {
+                        card.add(titles.toArray()[i].toString());
+                        card.add(subtitles.toArray()[subtitleIndex].toString());
+                        subtitleIndex++;
+                    } else {
+                        System.out.println("Card Generation Error: no card type!");
+                    }
+
+                    System.out.println("Card: " + card);
+                    cards.add(card);
+                    //cards = new ArrayList(card);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -156,14 +181,14 @@ public class initDeck {
         return cards;
     }
 
-    public ArrayList<initCard> dealCards(int nCards) {
-        ArrayList<initCard> ret = new ArrayList<initCard>();
-        for (int i = 0; i < nCards; i++) {
-            int index = new Random().nextInt(cards.size());
-            initCard card = cards.remove(index);
-            ret.add(card);
-            System.out.println("Card = " + card);
-        }
-        return ret;
-    }
+//    public ArrayList<Object[]> dealCards(int nCards) {
+//        ArrayList<Object[]> ret = new ArrayList<Object[]>();
+//        for (int i = 0; i < nCards; i++) {
+//            int index = new Random().nextInt(cards.size());
+//            initCard card = cards.remove(index);
+//            ret.add(card);
+//            System.out.println("Card = " + card);
+//        }
+//        return ret;
+//    }
 }
