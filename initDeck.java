@@ -2,12 +2,15 @@ import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
 import java.io.File;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -43,81 +46,114 @@ public class initDeck {
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
                 Document doc = dBuilder.parse(fXmlFile);
 
-                doc.getDocumentElement().normalize();
+                NodeList dictList = doc.getElementsByTagName("array");
 
-                traverse(doc.getDocumentElement());
+                for (int i = 0; i<dictList.getLength(); i++) {
+
+                    Node p = dictList.item(i);
+                    if(p.getNodeType()==Node.ELEMENT_NODE){
+
+                        Element key = (Element) p;
+                        NodeList keyList = key.getChildNodes();
+
+                        for(int j=0; j<keyList.getLength(); j++) {
+
+                            Node q = keyList.item(j);
+
+                            if (q.getNodeType()==Node.ELEMENT_NODE){
+
+                                Element key2 = (Element) q;
+                                NodeList key2List = key2.getChildNodes();
 
 
-//                for (int i = 0; i < NUM_CARDS_INIT; i++) {
-////                    rawContent = doc.getElementsByTagName("dict").item(i).getTextContent();
-////                    if (i == 0){
-////                        //cut off unnecessary "cards" string before processing
-////                        rawContent = rawContent.substring(5);
-////                    }
-////
-////                    System.out.println("Card"+ i +" : " + rawContent);
-////                    cards.add(new initCard(i));
-//
-//                }
+                                for (int k=0; k<key2List.getLength(); k++) {
+
+                                    Node r = key2List.item(k);
+
+                                    if (!(r.getNodeName().equals("#text"))) {
+
+                                        switch(r.getTextContent()){
+                                            case "fileName":
+                                                r = key2List.item(k+2);
+                                                fileNames.add(r.getTextContent());
+                                                break;
+                                            case "imageName":
+                                                r = key2List.item(k+2);
+                                                imageNames.add(r.getTextContent());
+                                                break;
+                                            case "card_type":
+                                                r = key2List.item(k+2);
+                                                card_types.add(r.getTextContent());
+                                                break;
+                                            case "title":
+                                                r = key2List.item(k+2);
+                                                titles.add(r.getTextContent());
+                                                break;
+                                            case "chemistry":
+                                                r = key2List.item(k+2);
+                                                chemistrys.add(r.getTextContent());
+                                                break;
+                                            case "classification":
+                                                r = key2List.item(k+2);
+                                                classifications.add(r.getTextContent());
+                                                break;
+                                            case "crystal_system":
+                                                r = key2List.item(k+2);
+                                                crystal_systems.add(r.getTextContent());
+                                                break;
+                                            case "occurrence":
+                                                r = key2List.item(k+2);
+                                                occurrences.add(r.getTextContent());
+                                                //needs custom array formatting
+                                                break;
+                                            case "hardness":
+                                                r = key2List.item(k+2);
+                                                hardnesss.add(r.getTextContent());
+                                                break;
+                                            case "specific_gravity":
+                                                r = key2List.item(k+2);
+                                                specific_gravitys.add(r.getTextContent());
+                                                break;
+                                            case "cleavage":
+                                                r = key2List.item(k+2);
+                                                cleavages.add(r.getTextContent());
+                                                break;
+                                            case "crustal_abundance":
+                                                r = key2List.item(k+2);
+                                                crustal_abundances.add(r.getTextContent());
+                                                break;
+                                            case "economic_value":
+                                                r = key2List.item(k+2);
+                                                economic_values.add(r.getTextContent());
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+//                System.out.println(fileNames);
+//                System.out.println(imageNames);
+//                System.out.println(card_types);
+//                System.out.println(titles);
+//                System.out.println(chemistrys);
+//                System.out.println(classifications);
+//                System.out.println(crystal_systems);
+//                System.out.println(occurrences);
+//                System.out.println(hardnesss);
+//                System.out.println(specific_gravitys);
+//                System.out.println(cleavages);
+//                System.out.println(crustal_abundances);
+//                System.out.println(economic_values);
+                for (int i = 0; i<fileNames.size(); i++){
+                    
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return cards;
-    }
-
-    public static void traverse(Node node) {
-        // do something with the current node instead of System.out
-        System.out.println("New Node: " + node.getNodeName());
-        System.out.println("New Node: " + node.getFirstChild());
-        System.out.println("New Node: " + node.getFirstChild().getTextContent());
-//        System.out.println("New Node: " + node.);
-        //System.out.println("Node Value: " + node.getTextContent());
-        //loop to find if node is called cards
-            //for every dict in array
-                //create array of arrays that store each cards info
-        NodeList nodeList = node.getChildNodes();
-
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node currentNode = nodeList.item(i);
-
-            if (!(currentNode.getNodeName().equals("#text"))) {
-                //do stuff
-                switch(currentNode.getTextContent()){
-                    case "fileName":
-                        fileNames.add(currentNode.getTextContent());
-
-                    case "imageName":
-                    case "card_type":
-                    case "title":
-                    case "chemistry":
-                    case "classification":
-                    case "crystal_system":
-                    case "occurrence":
-                    case "hardness":
-                    case "specific_gravity":
-                    case "cleavage":
-                    case "crustal_abundance":
-                    case "economic_value":
-                }
-
-                System.out.println("value = '" + currentNode.getTextContent() + "'");
-//                if (currentNode.getTextContent().equals("cards")) {
-//                    System.out.println("Found Cards");
-//                }
-                //goto: next node
-                traverse(currentNode);
-            }
-        }
-//        NodeList nodeList = node.getChildNodes();
-//        for (int i = 0; i < nodeList.getLength(); i++) {
-//            Node currentNode = nodeList.item(i);
-//            if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
-//                //calls this method for all the children which is Element
-//                traverse(currentNode);
-//            }
-//        }
-        //System.out.println(fileNames);
     }
 
     public ArrayList<initCard> dealCards(int nCards) {
