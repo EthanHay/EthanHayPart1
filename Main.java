@@ -35,7 +35,9 @@ public class Main {
         System.out.println("Building new deck...");
 
         ArrayList deck = initGame.buildDeck();
-        System.out.println(deck);
+//        ArrayList test = (ArrayList) deck.toArray()[0];
+//        System.out.println(test.toArray()[0]);
+
         System.out.println("");
         System.out.println("");
         System.out.println("Finished building...");

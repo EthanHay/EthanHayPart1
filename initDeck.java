@@ -40,6 +40,12 @@ public class initDeck {
     public initDeck() {
 
     }
+    public static String getFileName() {
+        String ret;
+
+        ret = "";
+        return ret;
+    }
 
     public ArrayList initDeck() {
         String rawContent;
@@ -146,7 +152,7 @@ public class initDeck {
                 int subtitleIndex = 0;
                 for (int i = 0; i<fileNames.size()-1; i++){
 
-                    ArrayList card = new ArrayList();
+                    ArrayList<String> card = new ArrayList<String>();
 
                     card.add(fileNames.toArray()[i].toString());
                     card.add(imageNames.toArray()[i].toString());
