@@ -19,7 +19,6 @@ import java.util.Random;
  */
 public class initDeck {
 
-    private static final int NUM_CARDS_INIT = 53; //this is the highest amount, add fail-safe later.  54 predefined cards, 53 + zero index
     private static ArrayList<String> fileNames = new ArrayList<>();
     private static ArrayList<String> imageNames = new ArrayList<>();
     private static ArrayList<String> card_types = new ArrayList<>();
@@ -36,20 +35,9 @@ public class initDeck {
     private static ArrayList<String> economic_values = new ArrayList<>();
 
     public ArrayList cards = new ArrayList();
-
-    public initDeck() {
-
-    }
-    public static String getFileName() {
-        String ret;
-
-        ret = "";
-        return ret;
-    }
+    public ArrayList rulecards = new ArrayList();
 
     public ArrayList initDeck() {
-        String rawContent;
-
         {
             try {
 
@@ -168,7 +156,7 @@ public class initDeck {
                         card.add(cleavages.toArray()[i].toString());
                         card.add(crustal_abundances.toArray()[i].toString());
                         card.add(economic_values.toArray()[i].toString());
-                    } else if ((card_types.toArray()[i].toString().equals("trump")|(card_types.toArray()[i].toString().equals("rule")))) {
+                    } else if ((card_types.toArray()[i].toString().equals("trump"))|(card_types.toArray()[i].toString().equals("rule"))) {
                         card.add(titles.toArray()[i].toString());
                         card.add(subtitles.toArray()[subtitleIndex].toString());
                         subtitleIndex++;
@@ -176,25 +164,30 @@ public class initDeck {
                         System.out.println("Card Generation Error: no card type!");
                     }
 
-                    System.out.println("Card: " + card);
+//                    System.out.println("Card: " + card);
                     cards.add(card);
+
+
+
                     //cards = new ArrayList(card);
                 }
+                //loop and remove all rule cards
+
+                for(int j=0; j < cards.size(); j++) {
+                    ArrayList temp = (ArrayList) cards.toArray()[j];
+                    System.out.println(temp);
+                    if(temp.toArray()[2].equals("rule")){
+                        rulecards.add(cards.get(j));
+                        cards.remove(j);
+                        //System.out.println("removed rule Card");
+                        j--;
+                    }
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return cards;
     }
-
-//    public ArrayList<Object[]> dealCards(int nCards) {
-//        ArrayList<Object[]> ret = new ArrayList<Object[]>();
-//        for (int i = 0; i < nCards; i++) {
-//            int index = new Random().nextInt(cards.size());
-//            initCard card = cards.remove(index);
-//            ret.add(card);
-//            System.out.println("Card = " + card);
-//        }
-//        return ret;
-//    }
 }

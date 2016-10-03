@@ -1,14 +1,16 @@
 /**
  * Created by Ethan on 13-Sep-16.
  */
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Main {
     public static int numOfPlayers;
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         showWelcome();
         showMenu(); //Also gets user choice and can start game.
     }
@@ -37,25 +39,25 @@ public class Main {
         ArrayList deck = initGame.buildDeck();
 //        ArrayList test = (ArrayList) deck.toArray()[0];
 //        System.out.println(test.toArray()[0]);
-
         System.out.println("");
         System.out.println("");
         System.out.println("Finished building...");
         System.out.println("");
-
         getNumberOfBots();
         System.out.println("");
         System.out.println("");
         System.out.println("Selecting dealer...");
         dealerIndex = initGame.selectDealer(numOfPlayers);
-        System.out.println("");
-        System.out.println("");
         System.out.println("The Dealer is: Player" + dealerIndex);
-
+        System.out.println("");
         initGame game = new initGame(numOfPlayers);
-
-        //game.dealRandomCards();
-//      deck = initGame.buildDeck();
+        System.out.println("Players initialised...");
+        System.out.println("");
+        System.out.println("Starting Game...");
+        System.out.println("#######################################################");
+//        ArrayList player1Cards = (ArrayList) initPlayer.getPlayerCards(0);
+//        System.out.println(player1Cards);
+        initGame.startGameLoop(dealerIndex);
     }
 
 
@@ -71,14 +73,14 @@ public class Main {
         }
         //double check input and act on input
         if (start.equals("Y") || start.equals("N")) {
-            if (start.equals("Y")){
+            if (start.equals("Y")) {
                 //Start game
                 startGame();
             } else {
                 //go back to menu/ ask to continue/load game
                 System.out.printf("Start = " + start);
             }
-        } else if (start.equals("E")){
+        } else if (start.equals("E")) {
             //exit application
             System.out.printf("Closing Application...");
         }
@@ -107,12 +109,7 @@ public class Main {
         }
         numOfPlayers = Integer.parseInt(players) + 1;
 
-        //iteratively create each player, when i = 0 playable character is created
-        for (int i = 0; i < numOfPlayers; i++){
-            initPlayer.createPlayer(i);
-        }
-        System.out.println("Players initialised...");
-        System.out.println("");
-        System.out.println("");
     }
+
+
 }
